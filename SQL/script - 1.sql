@@ -133,20 +133,20 @@ CREATE TABLE SUPPLIER (
 
 # DROP TABLE SUPPLIER
 
-CREATE TABLE SHIPPER (
+CREATE TABLE SHIPPER_PERSON (
 	id_shipper int auto_increment,
     id_company int,
     type varchar(64),
     work_schedule varchar(128),  # AVALIAR O TIPO AQUI
     shipping_price float,
     description varchar(512),
-    primary key (id_company),
+    primary key (id_shipper),
     foreign key (id_company) references COMPANY(id_company)
 );
 
 # DROP TABLE SHIPPER
 
-CREATE TABLE SUPPLIER (
+CREATE TABLE SUPPLIER_COMPANY (
 	id_supplier int auto_increment,
     id_company int,
     contact_name varchar(128),
