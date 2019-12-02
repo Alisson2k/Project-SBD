@@ -29,13 +29,13 @@ CREATE TABLE PERSON (
 CREATE TABLE CLIENT_REPORT (
 	id_person int,
     average_rate decimal(2,1),
-    satisfaction_level decimal(2,1),
+    satisfaction_level int, # {1, 5}
     shopping_number int,
     prefer_category varchar(64),
     foreign key (id_person) references PERSON(id_person)
 );
 
-# DROP TABLE CLIENT_REPORT
+# DROP TABLE CLIENT_REPORT;
 
 CREATE TABLE PRODUCT (
 	id_prod int auto_increment,
@@ -51,7 +51,6 @@ CREATE TABLE PRODUCT (
 
 CREATE TABLE PRODUCT_DETAIL (
 	id_prod int,
-    name varchar(128),
     gross_weigth float,
     net_weigth float,
     type_of_material varchar(32),
@@ -62,15 +61,14 @@ CREATE TABLE PRODUCT_DETAIL (
     foreign key (id_prod) references PRODUCT(id_prod)
 );
 
-# DROP TABLE PRODUCT_DETAIL
+# DROP TABLE PRODUCT_DETAIL;
 
 CREATE TABLE COMPANY (
 	id_company int auto_increment,
     email varchar(128),
     cep varchar(16),
     state varchar(64),
-    cnpj varchar(16),
-    category varchar(64),
+    cnpj varchar(32),
     name varchar(128),
     city varchar(64),
     country varchar(64),
@@ -79,19 +77,21 @@ CREATE TABLE COMPANY (
     primary key (id_company)
 );
 
-# DROP TABLE COMPANY
+DROP TABLE COMPANY;
 
 CREATE TABLE ORDERS (
 	id_order int auto_increment,
+    id_prod int,
     order_date datetime,
     order_state enum('Em andamento', 'Aprovado', 'Cancelado'),
     quantity int,
     type_of_payment enum('B', 'C'), # Boleto ou cartão 
     due_date date,
-    primary key (id_order)
+    primary key (id_order),
+    foreign key (id_prod) references PRODUCT(id_prod)
 );
 
-# DROP TABLE ORDERS
+# DROP TABLE ORDERS;
 
 CREATE TABLE PURCHASE_HISTORY (
 	id_purch int auto_increment,
@@ -106,34 +106,34 @@ CREATE TABLE PURCHASE_HISTORY (
 
 CREATE TABLE SHOPPING_CART (
 	id_cart int auto_increment,
+    id_person int,
+    id_prod int,
     quantity int,
     total_price float,
-    primary key (id_cart)
+    primary key (id_cart),
+    foreign key (id_person) references PERSON(id_person),
+    foreign key (id_prod) references PRODUCT(id_prod)
 );
 
-# DROP TABLE SHOPPING_CART
+# DROP TABLE SHOPPING_CART;
 
 CREATE TABLE CUSTOMER (
-	id_customer int auto_increment,
     id_person int,
     nickname varchar(128),
-    primary key (id_customer),
     foreign key (id_person) references PERSON(id_person)
 );
 
-# DROP TABLE CUSTOMER
+# DROP TABLE CUSTOMER;
 
-CREATE TABLE SUPPLIER (
-	id_supplier int auto_increment,
+CREATE TABLE SUPPLIER_PERSON (
     id_person int,
     contact_name varchar(128),
-	primary key (id_supplier),
 	foreign key (id_person) references PERSON(id_person)
 );
 
-# DROP TABLE SUPPLIER
+# DROP TABLE SUPPLIER_PERSON;
 
-CREATE TABLE SHIPPER_PERSON (
+CREATE TABLE SHIPPER (
 	id_shipper int auto_increment,
     id_company int,
     type varchar(64),
@@ -154,4 +154,4 @@ CREATE TABLE SUPPLIER_COMPANY (
     foreign key (id_company) references COMPANY(id_company)
 );
 
-# DROP TABLE SUPPLIER
+# DROP TABLE SUPPLIER_COMPANY
