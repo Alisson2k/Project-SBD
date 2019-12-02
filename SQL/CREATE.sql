@@ -24,18 +24,37 @@ CREATE TABLE PERSON (
     primary key (id_person)
 );
 
-# DROP TABLE PERSON;
+CREATE TABLE CUSTOMER (
+    id_person int,
+    nickname varchar(128),
+    foreign key (id_person) references PERSON(id_person)
+);
+
+CREATE TABLE SUPPLIER_PERSON (
+    id_person int,
+    contact_name varchar(128),
+	foreign key (id_person) references PERSON(id_person)
+);
 
 CREATE TABLE CLIENT_REPORT (
 	id_person int,
-    average_rate decimal(2,1),
+    average_rate decimal(2,1), # {0, 10}
     satisfaction_level int, # {1, 5}
     shopping_number int,
     prefer_category varchar(64),
     foreign key (id_person) references PERSON(id_person)
 );
 
-# DROP TABLE CLIENT_REPORT;
+CREATE TABLE PURCHASE_HISTORY (
+	id_purch int auto_increment,
+    id_order int,
+	id_company int,	# SUPPLIER
+    purchase_date datetime,
+    type_of_payment enum('B','C'),
+    primary key (id_purch),
+    foreign key (id_order) references ORDERS(id_order),
+    foreign key (id_company) references COMPANY(id_company)
+);
 
 CREATE TABLE PRODUCT (
 	id_prod int auto_increment,
@@ -46,8 +65,6 @@ CREATE TABLE PRODUCT (
     amount int,
     primary key (id_prod)
 );
-
-# DROP TABLE PRODUCT
 
 CREATE TABLE PRODUCT_DETAIL (
 	id_prod int,
@@ -61,7 +78,28 @@ CREATE TABLE PRODUCT_DETAIL (
     foreign key (id_prod) references PRODUCT(id_prod)
 );
 
-# DROP TABLE PRODUCT_DETAIL;
+CREATE TABLE SHOPPING_CART (
+	id_cart int auto_increment,
+    id_person int,
+    id_prod int,
+    quantity int,
+    total_price float,
+    primary key (id_cart),
+    foreign key (id_person) references PERSON(id_person),
+    foreign key (id_prod) references PRODUCT(id_prod)
+);
+
+CREATE TABLE ORDERS (
+	id_order int auto_increment,
+    id_prod int,
+    order_date datetime,
+    order_state enum('Em andamento', 'Aprovado', 'Cancelado'),
+    quantity int,
+    type_of_payment enum('B', 'C'), # Boleto ou cartão 
+    due_date date,
+    primary key (id_order),
+    foreign key (id_prod) references PRODUCT(id_prod)
+);
 
 CREATE TABLE COMPANY (
 	id_company int auto_increment,
@@ -77,62 +115,6 @@ CREATE TABLE COMPANY (
     primary key (id_company)
 );
 
-DROP TABLE COMPANY;
-
-CREATE TABLE ORDERS (
-	id_order int auto_increment,
-    id_prod int,
-    order_date datetime,
-    order_state enum('Em andamento', 'Aprovado', 'Cancelado'),
-    quantity int,
-    type_of_payment enum('B', 'C'), # Boleto ou cartão 
-    due_date date,
-    primary key (id_order),
-    foreign key (id_prod) references PRODUCT(id_prod)
-);
-
-# DROP TABLE ORDERS;
-
-CREATE TABLE PURCHASE_HISTORY (
-	id_purch int auto_increment,
-    purchase_date datetime,
-    type_of_payment enum('B','C'),
-    # order_state > change to id_order
-    # carrier_name > change to id_company (SHIPPER)
-    primary key (id_purch)
-);
-
-# DROP TABLE PURCHASE_HISTORY
-
-CREATE TABLE SHOPPING_CART (
-	id_cart int auto_increment,
-    id_person int,
-    id_prod int,
-    quantity int,
-    total_price float,
-    primary key (id_cart),
-    foreign key (id_person) references PERSON(id_person),
-    foreign key (id_prod) references PRODUCT(id_prod)
-);
-
-# DROP TABLE SHOPPING_CART;
-
-CREATE TABLE CUSTOMER (
-    id_person int,
-    nickname varchar(128),
-    foreign key (id_person) references PERSON(id_person)
-);
-
-# DROP TABLE CUSTOMER;
-
-CREATE TABLE SUPPLIER_PERSON (
-    id_person int,
-    contact_name varchar(128),
-	foreign key (id_person) references PERSON(id_person)
-);
-
-# DROP TABLE SUPPLIER_PERSON;
-
 CREATE TABLE SHIPPER (
 	id_shipper int auto_increment,
     id_company int,
@@ -144,8 +126,6 @@ CREATE TABLE SHIPPER (
     foreign key (id_company) references COMPANY(id_company)
 );
 
-# DROP TABLE SHIPPER
-
 CREATE TABLE SUPPLIER_COMPANY (
 	id_supplier int auto_increment,
     id_company int,
@@ -154,4 +134,6 @@ CREATE TABLE SUPPLIER_COMPANY (
     foreign key (id_company) references COMPANY(id_company)
 );
 
-# DROP TABLE SUPPLIER_COMPANY
+### ARRUMAR NO DIAGRAMA EER AS TABELAS ###
+# PURCHASE_HISTORY > trocar 'order_state' e 'carrier_name' por 2 FK, id_order, id_company
+# PRODUCT_DETAIL > remover atributo 'name' > já está na tabela product

@@ -3,7 +3,7 @@
 # SQL script that insert datas in database
 
 # @authors		Alisson Guimarães, João Antônio Nardini and Nathan Augusto
-# @date			2019-12-01, sunday 3:45 pm
+# @date			2019-12-01, sunday 7:14 pm
 
 #######################################################################################
 
@@ -31,7 +31,6 @@ INSERT INTO SUPPLIER_PERSON (id_person, contact_name)
 values	(2, 'Nicolas Almeida'),
 		(5, 'Carolina Goncalves');
 
-
 INSERT INTO PRODUCT (id_prod, name, unit_price, description, rating, amount)
 values	(DEFAULT, 'Smart TV 4K', 4599.99, 'Smart Tv 4k Samsung Led 75 , Hdmi, Wifi, Usb - 75ru7100', 9, 23),
 		(DEFAULT, 'Vestido Justo Feminino', 59.99, 'Vestido Midi Justo Canelado Moda Roupas Femininas', 7, 78),
@@ -46,4 +45,3 @@ INSERT INTO COMPANY (id_company, email, cep, state, cnpj, name, city, country, p
 values	(DEFAULT, 'ubermodas@mail.com', '31578-020', 'MG', '69.825.065/0001-72', 'UBER MODAS', 'Belo Horizonte', 'Brazil', '(31)99671-8080', 'Rua Orlando Mendes, 995'),
 		(DEFAULT, 'tagima@mail.com', '21512-200', 'RJ', '48.834.360/0001-15', 'Tagima', 'Rio de Janeiro', 'Brazil', '(21)21118-8202', 'Rua de Bonsucesso, 494'),
         (DEFAULT, 'froidshipper@mail.com', '03681-030', 'SP', '46.353.414/0001-03', 'Froid Shipper', 'São Paulo', 'Brazil', '(11)60907-3062', 'Rua Filomeno Batista de Araújo, 242');
-
