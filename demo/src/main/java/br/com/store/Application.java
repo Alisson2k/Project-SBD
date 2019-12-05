@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"mz.server.spring.repository"})
 @EntityScan(basePackages = "mz.server.hibernate.model")
-@EnableTransactionManagement
-@EnableScheduling
 public class Application {
 
 	public static void main(String[] args) {

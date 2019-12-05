@@ -1,5 +1,6 @@
 package br.com.store.controller;
 
+import br.com.store.domain.Person;
 import br.com.store.service.StoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,8 @@ public class StoreController {
 
     @RequestMapping(name = "/")
     public void index() {
-        System.out.println("Entrou aqui!");
-        storeService.findAllProducts();
+        Long id = 2L;
+        String person = storeService.findPersonById(id);
+        System.out.println(person);
     }
 }
