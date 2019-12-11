@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ShoppingCartRepository extends Repository<Product, Long> {
 
-    List<ShoppingCart> findAll(Person p);
+    List<ShoppingCart> findAll(Long id_person);
 
     void Insert_Cart(Product pr,Person p);
 

@@ -18,13 +18,12 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     @Autowired
     private EntityManager entityManager;
 
-    public List<ShoppingCart> findAll(Person p){
+    public List<ShoppingCart> findAll(Long id_person){
 
-        Query query = entityManager.createQuery("select sp from shopping_cart sp where sp.person = :p ")
-                .setParameter("p",p);
+        Query query = entityManager.createQuery("select sp from shopping_cart sp where sp.person.id_person = :p ")
+                .setParameter("p",id_person);
 
         return query.getResultList();
-
 
     }
 
@@ -34,8 +33,24 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     }
 
+
+    public void Delete_Cart(Long id_cart) {
+
+
+
+    }
+
+    public float Subtotal(Long id_person){
+
+        Query query = entityManager.createQuery("select vs from view_shopping_cart vs where id_person = :p ")
+                .setParameter("p",id_person);
+
+           // return query.getSingleResult();
+
+        return 0;
+
+    }
+
 }
 
 
-
-}

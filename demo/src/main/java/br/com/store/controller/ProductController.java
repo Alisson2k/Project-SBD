@@ -9,20 +9,36 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import java.util.List;
 
 @Controller
-@RequestMapping("/Products")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
     private ProductRepositoryImpl product;
 
+    private EntityManager entityManager;
+
+
     @GetMapping("/")
     public void index(){
 
-        List<Product> products = product.findAll(); //TODO:PASSAR A LISTA DE PRODUTOS PRO FRONT
+        Query query = entityManager.createQuery("BEGIN TRANSACTION");
 
+        try {
+
+            List<Product> products = product.findAll(); //TODO:PASSAR A LISTA DE PRODUTOS PRO FRONT
+            entityManager.createQuery("COMMIT");
+
+        }catch (PersistenceException e){
+
+            entityManager.createQuery("ROLLBACK");
+
+        }
     }
 
     @PostMapping("/delete/{id}")
@@ -39,7 +55,7 @@ public class ProductController {
 
     }
 
-    @PostMapping("/Update/{id}")
+    @PostMapping("/update/{id}")
     public void update(Long id, float new_price){
 
         product.Update_price(id,new_price);

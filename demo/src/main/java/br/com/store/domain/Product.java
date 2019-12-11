@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity(name="product")
 public class Product extends PersistenceContext {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_prod;
