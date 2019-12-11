@@ -1,0 +1,9 @@
+.card:hover {
+    cursor: pointer;
+    opacity: .7;
+}
+
+.single-product:hover {
+    cursor: pointer;
+    opacity: .7;
+}
