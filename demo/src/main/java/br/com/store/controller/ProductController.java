@@ -2,8 +2,7 @@ package br.com.store.controller;
 
 
 import br.com.store.domain.Product;
-import br.com.store.repository.ProductRepository;
-import br.com.store.repository.ProductRepositoryImpl;
+import br.com.store.repository.Impl.ProductRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,6 +1,7 @@
-package br.com.store.repository;
+package br.com.store.repository.Impl;
 
 import br.com.store.domain.Product;
+import br.com.store.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ProductRepositoryImpl implements ProductRepository{
+public class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
     private EntityManager entityManager;

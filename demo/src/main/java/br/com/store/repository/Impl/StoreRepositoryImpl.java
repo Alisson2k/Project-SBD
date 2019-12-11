@@ -1,6 +1,7 @@
-package br.com.store.repository;
+package br.com.store.repository.Impl;
 
 import br.com.store.domain.Person;
+import br.com.store.repository.StoreRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
