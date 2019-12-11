@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
@@ -18,20 +17,24 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     public List<Product> findAll(){
 
-        Query query = entityManager.createQuery("SELECT P FROM product P ");
+        Query query = entityManager.createQuery("SELECT P FROM product P inner join product_detail pd on pd.id_prod = P.idprod");
         return query.getResultList();
 
     }
 
     public Product findOne(Long id_prod){
 
-        Query query = entityManager.createQuery("SELECT P FROM product P WHERE P.id_prod = :input_id")
+        Query query = entityManager.createQuery("SELECT P FROM product P inner join product_detail pd on pd.id_prod = P.idprod WHERE P.id_prod = :input_id")
                 .setParameter("input_id",id_prod);
 
         return (Product) query.getSingleResult();
     }
 
     public void Delete(Long id_prod){
+
+        //APAGAR OS DETALHES DO PRODUTO ANTES DE APAGAR O PRODUTO EM SI , RESTRIÇÃO DE INTEGRIDADE.
+        Query q = entityManager.createQuery("DELETE FROM product_detail pd WHERE pd.id_prod =:input_id")
+                .setParameter("input_id",id_prod);
 
         Query query = entityManager.createQuery("DELETE  FROM product P WHERE P.id_prod = :input_id")
                 .setParameter("input_id",id_prod);

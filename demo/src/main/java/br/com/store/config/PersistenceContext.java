@@ -18,10 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = {
-        "br.com.store.repository",
-        "br.com.store.domain"
-})
+@EnableJpaRepositories(basePackages = {"br.com.store.repository", "br.com.store.domain"})
 public class PersistenceContext {
 
     @Bean
