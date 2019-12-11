@@ -46,9 +46,16 @@ values	(DEFAULT, 'ubermodas@mail.com', '31578-020', 'MG', '69.825.065/0001-72', 
 		(DEFAULT, 'tagima@mail.com', '21512-200', 'RJ', '48.834.360/0001-15', 'Tagima', 'Rio de Janeiro', 'Brazil', '(21)21118-8202', 'Rua de Bonsucesso, 494'),
         (DEFAULT, 'froidshipper@mail.com', '03681-030', 'SP', '46.353.414/0001-03', 'Froid Shipper', 'São Paulo', 'Brazil', '(11)60907-3062', 'Rua Filomeno Batista de Araújo, 242');
 
-INSERT INTO SHOPPING_CART 
-(id_person,id_prod,total_price)
-VALUES
-(1,3,530);
+INSERT INTO ORDERS ()
+values	()
+
+INSERT INTO SHOPPING_CART (id_person,id_prod,total_price) VALUES (1, 3, 530);
+
+INSERT INTO SHIPPER (id_shipper, id_company, type, work_schedule, shipping_price, description)
+values	(DEFAULT, 3, 'Encomendas', 'SEG-SEX 08:00:00-18:00:00 SAB 08:00:00-12:00:00', 3800.00, "Froid Shipper. Rápido, fácil, flexível.");
+
+INSERT INTO SUPPLIER_COMPANY (id_supplier, id_company, contact_name)
+values 	(DEFAULT, 1, "Uber Modas"),
+		(DEFAULT, 2, "Tagima Instrumentos");
 
 
