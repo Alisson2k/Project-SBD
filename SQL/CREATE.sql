@@ -119,7 +119,7 @@ CREATE TABLE SHIPPER (
 	id_shipper int auto_increment,
     id_company int,
     type varchar(64),
-    work_schedule varchar(128),  # AVALIAR O TIPO AQUI
+    work_schedule varchar(128),
     shipping_price float,
     description varchar(512),
     primary key (id_shipper),
