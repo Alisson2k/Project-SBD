@@ -12,22 +12,31 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_person;
 
+    @Column(name = "phone")
     private String phone;
 
+    @Column(name = "country")
     private String country;
 
+    @Column(name = "fname")
     private String fname;
 
+    @Column(name = "lname")
     private String lname;
 
+    @Column(name = "cpf")
     private String cpf;
 
+    @Column(name = "state")
     private String state;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "address")
     private String address;
 
+    @Column(name = "bdate")
     private Date bdate;
 
     public long getId() {
