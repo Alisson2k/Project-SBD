@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 import java.util.Optional;
 
-public interface StoreRepository {
+public interface StoreRepository extends JpaRepository<Person, Long> {
 
-    List<String> findTeste();
 }

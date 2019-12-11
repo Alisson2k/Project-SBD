@@ -1,8 +1,9 @@
+const NUM_PRODS = 10;
 getProducts();
 
 function getProducts() {
     var listProducts = document.getElementById("listProducts");
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < NUM_PRODS; i++) {
         var productDOM = [
             document.createElement("div"),  // 0
             document.createElement("div"),  // 1
@@ -22,7 +23,7 @@ function getProducts() {
         productDOM[4].src = "./img/P-IMAGE.png"                // Imagem do produto
         productDOM[4].alt = "Titulo do produto"                // Titulo do produto
 
-        productDOM[3].href = ""                                // href para o produto
+        productDOM[3].href = "./product.html"                                // href para o produto
         productDOM[3].appendChild(productDOM[4]);
 
         productDOM[2].className = "product-img";
@@ -58,8 +59,19 @@ function getProducts() {
 
         productDOM[0].className = "custom-col-5 custom-col-style";
         productDOM[0].appendChild(productDOM[1]);
+        productDOM[0].id = "product_" + i;
 
         listProducts.appendChild(productDOM[0]);
     }
 
+}
+
+function botaoTeste() {
+    for (var i = 1; i < NUM_PRODS; i++) {
+        if (document.getElementById("product_" + i).style.display === "none") {
+            document.getElementById("product_" + i).style.display = "block";
+        } else {
+            document.getElementById("product_" + i).style.display = "none";
+        }
+    }
 }
