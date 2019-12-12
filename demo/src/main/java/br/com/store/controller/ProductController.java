@@ -40,18 +40,39 @@ public class ProductController {
     }
 
     @GetMapping("/filter/byprice")
-    public void filter(){
+    public List<Product> filter(){
 
+        List<Product> pr = product.filterByPrice(true);
 
+        return pr;
 
+    }
+
+    @GetMapping("/filter/byrating")
+    public List<Product> filterByRating(){
+
+        List<Product> pr = product.filterByRating(true);
+
+        return pr;
+
+    }
+
+    @GetMapping("/filter/byprice")
+    public List<Product> filterByCategory(){
+
+        List<Product> pr = product.filterByCategory();
+
+        return pr;
 
     }
 
 
     @GetMapping("/search/{id}")
-    public void search(Long id){
+    public Product search(Long id){
 
         Product prod = product.findOne(id);
+
+        return prod;
 
     }
 
@@ -68,8 +89,4 @@ public class ProductController {
 
         product.update_price(id,new_price);
     }
-
-
-
-
 }
