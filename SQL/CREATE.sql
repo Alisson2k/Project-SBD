@@ -10,7 +10,7 @@
 CREATE DATABASE appSBD;
 USE appSBD;
 
-CREATE TABLE PERSON (
+CREATE TABLE person (
 	id_person int auto_increment,
     phone varchar(16),
     country varchar(64),
