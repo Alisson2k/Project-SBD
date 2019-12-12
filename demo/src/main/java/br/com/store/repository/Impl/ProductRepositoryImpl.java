@@ -19,7 +19,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     public List<Product> findAll() throws PersistenceException {
 
-        Query query = entityManager.createQuery("SELECT P FROM PRODUCT P inner join PRODUCT_DETAIL pd on pd.id_prod = P.id_prod");
+        Query query = entityManager.createQuery("SELECT P FROM product P inner join product_detail pd on pd.id_prod = P.id_prod");
         return query.getResultList();
 
     }

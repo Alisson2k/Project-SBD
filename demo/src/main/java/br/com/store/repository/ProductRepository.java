@@ -13,10 +13,6 @@ public interface ProductRepository extends Repository<Product, Long> {
 
     Product findOne(Long id_prod);
 
-    List<Product> select1();
-
-    List<Product> select2();
-
     List<ClientReport> select3();
 
     List<Product> select4();
