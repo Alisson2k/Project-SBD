@@ -27,30 +27,26 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
 
     }
 
-    public void Insert_Cart(Product pr, Person p){
+    public void insert_Cart(Product pr, Person p){
 
 
 
     }
 
 
-    public void Delete_Cart(Long id_cart) {
+    public void delete_Cart(Long id_cart) {
 
 
 
     }
 
-    public float Subtotal(Long id_person){
+    public float subtotal(Long id_person){
 
         Query query = entityManager.createQuery("select vs from view_shopping_cart vs where id_person = :p ")
                 .setParameter("p",id_person);
 
-           // return query.getSingleResult();
-
-        return 0;
+        return (float) query.getSingleResult();
 
     }
 
 }
-
-

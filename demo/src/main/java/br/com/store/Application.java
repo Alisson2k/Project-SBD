@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-//@EnableJpaRepositories(basePackages = {"mz.server.spring.repository"})
+@EnableJpaRepositories(basePackages = {"mz.server.spring.repository"})
 @EntityScan(basePackages = "mz.server.hibernate.model")
 public class Application {
 
