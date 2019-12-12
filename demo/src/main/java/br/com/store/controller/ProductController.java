@@ -1,6 +1,5 @@
 package br.com.store.controller;
 
-
 import br.com.store.domain.Product;
 import br.com.store.repository.Impl.ProductRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ public class ProductController {
 
     private EntityManager entityManager;
 
-
     @GetMapping("/")
     public void index(){
 
@@ -31,7 +29,7 @@ public class ProductController {
 
         try {
 
-            List<Product> products = product.findAll(); //TODO:PASSAR A LISTA DE PRODUTOS PRO FRONT
+            List<Product> products = product.findAll();
             entityManager.createQuery("COMMIT");
 
         }catch (PersistenceException e){
@@ -41,25 +39,36 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/delete/{id}")
-    public void delete(Long id){
+    @GetMapping("/filter/byprice")
+    public void filter(){
 
-        product.Delete(id);
+
+
 
     }
+
 
     @GetMapping("/search/{id}")
     public void search(Long id){
 
-        Product prod = product.findOne(id); //TODO: PASSAR PRO FRONT
+        Product prod = product.findOne(id);
+
+    }
+
+
+    @PostMapping("/delete/{id}")
+    public void delete(Long id){
+
+        product.delete(id);
 
     }
 
     @PostMapping("/update/{id}")
     public void update(Long id, float new_price){
 
-        product.Update_price(id,new_price);
+        product.update_price(id,new_price);
     }
+
 
 
 

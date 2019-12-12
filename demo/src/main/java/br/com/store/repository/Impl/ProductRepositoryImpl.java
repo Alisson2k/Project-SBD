@@ -18,7 +18,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     public List<Product> findAll() throws PersistenceException {
 
-        Query query = entityManager.createQuery("SELECT P FROM product P inner join product_detail pd on pd.id_prod = P.idprod");
+        Query query = entityManager.createQuery("SELECT P FROM product P inner join product_detail pd on pd.id_prod = P.id_prod");
         return query.getResultList();
 
     }
@@ -31,7 +31,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         return (Product) query.getSingleResult();
     }
 
-    public void Delete(Long id_prod) throws PersistenceException {
+    public void delete(Long id_prod) throws PersistenceException {
 
         //APAGAR OS DETALHES DO PRODUTO ANTES DE APAGAR O PRODUTO EM SI , RESTRIÇÃO DE INTEGRIDADE.
         Query q = entityManager.createQuery("DELETE FROM product_detail pd WHERE pd.id_prod =:input_id")
@@ -42,7 +42,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     }
 
-    public void Update_price(Long id_prod, float new_price) throws PersistenceException {
+    public void update_price(Long id_prod, float new_price) throws PersistenceException {
 
         Query query = entityManager.createQuery("UPDATE product P SET P.unit_price = :new_price WHERE P.id_prod = :input_id")
                 .setParameter("input_id",id_prod)

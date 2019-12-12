@@ -1,9 +1,7 @@
 package br.com.store.controller;
 
-
 import br.com.store.domain.ShoppingCart;
 import br.com.store.repository.Impl.ShoppingCartRepositoryImpl;
-import br.com.store.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,15 +25,11 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/total/{id}")
-    public float subtotal(){
+    public float subtotal(@PathVariable("id") Long id_person){
 
+        float total = cart.subtotal(id_person);
 
-
-        return 0;
+        return total;
     }
-
-
-
-
 
 }

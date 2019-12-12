@@ -11,8 +11,8 @@ public interface ShoppingCartRepository extends Repository<Product, Long> {
 
     List<ShoppingCart> findAll(Long id_person);
 
-    void Insert_Cart(Product pr,Person p);
+    void insert_Cart(Product pr,Person p);
 
-    void Delete_Cart(Long id_cart);
+    void delete_Cart(Long id_cart);
 
 }
