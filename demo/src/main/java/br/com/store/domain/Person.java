@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity( name="person" )
+@Entity( name="PERSON" )
 public class Person implements Serializable {
 
     @Id

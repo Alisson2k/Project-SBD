@@ -1,12 +1,11 @@
 package br.com.store.domain;
 
-import br.com.store.config.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
-@Entity(name="product")
-public class Product extends PersistenceContext {
+@Entity(name="PRODUCT")
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

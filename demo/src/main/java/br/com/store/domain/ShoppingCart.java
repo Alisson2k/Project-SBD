@@ -4,7 +4,7 @@ import br.com.store.repository.ProductRepository;
 
 import javax.persistence.*;
 
-@Entity(name = "shopping_cart")
+@Entity(name = "SHOPPING_CART")
 public class ShoppingCart {
 
     @Id
