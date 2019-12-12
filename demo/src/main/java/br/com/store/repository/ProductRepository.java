@@ -13,5 +13,7 @@ public interface ProductRepository extends Repository<Product, Long> {
 
     Product findOne(Long id_prod);
 
+    void delete(Long id_prod);
+
     void update_price(Long id_prod, float new_price);
 }
