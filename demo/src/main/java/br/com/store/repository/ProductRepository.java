@@ -1,10 +1,11 @@
 package br.com.store.repository;
 
+import br.com.store.domain.ClientReport;
+import br.com.store.domain.Orders;
 import br.com.store.domain.Product;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductRepository extends Repository<Product, Long> {
 
@@ -16,5 +17,16 @@ public interface ProductRepository extends Repository<Product, Long> {
 
     void update_price(Long id_prod, float new_price);
 
+    List<Product> filterByCategory();
+
+    List<Product> avgOfBestRatingCategories();
+
+    List<ClientReport> clientInsatisfaction();
+
+    List<Orders> approvedOrders();
+
+    List<Product> filterByPrice(Boolean asc);
+
+    List<Product> filterByRating(Boolean asc);
 
 }

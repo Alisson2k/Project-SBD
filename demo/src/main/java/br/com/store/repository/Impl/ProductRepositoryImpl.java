@@ -1,5 +1,6 @@
 package br.com.store.repository.Impl;
 
+import br.com.store.domain.ClientReport;
 import br.com.store.domain.Orders;
 import br.com.store.domain.Product;
 import br.com.store.repository.ProductRepository;
@@ -51,7 +52,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     }
 
-    public List<Product> select1() {
+    public List<Product> filterByCategory() {
         Query query = entityManager.createNativeQuery(
                 "SELECT * FROM PRODUCT P\n" +
                         "NATURAL JOIN PRODUCT_DETAIL PD\n" +
@@ -61,7 +62,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         return query.getResultList();
     }
 
-    public List<Product> select2() {
+    public List<Product> avgOfBestRatingCategories() {
         Query query = entityManager.createNativeQuery(
                 "SELECT category , avg(unit_price)\n" +
                         "FROM PRODUCT\n" +
@@ -73,7 +74,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         return query.getResultList();
     }
 
-    public List<ClientReport> select3() {
+    public List<ClientReport> clientInsatisfaction() {
         Query query = entityManager.createNativeQuery(
                 "SELECT count(id_person) as \"Clientes Insatisfeitos\" FROM CLIENT_REPORT\n" +
                         "NATURAL JOIN PERSON\n" +
@@ -89,7 +90,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         return query.getResultList();
     }
 
-    public List<Orders> select4() {
+    public List<Orders> approvedOrders() {
         Query query = entityManager.createNativeQuery(
                 "SELECT * FROM ORDERS\n" +
                         "NATURAL JOIN PRODUCT\n" +
@@ -101,7 +102,7 @@ public class ProductRepositoryImpl implements ProductRepository {
         return query.getResultList();
     }
 
-    public List<Product> select5(Boolean asc) {
+    public List<Product> filterByPrice(Boolean asc) {
         Query query = asc ? entityManager.createNativeQuery(
                 "SELECT * FROM PRODUCT\n" +
                         "ORDER BY unit_price asc;") :
@@ -112,18 +113,8 @@ public class ProductRepositoryImpl implements ProductRepository {
         return query.getResultList();
     }
 
-    public List<Product> select6(Boolean asc) {
-        Query query = asc ? entityManager.createNativeQuery(
-                "SELECT * FROM PRODUCT\n" +
-                        "ORDER BY unit_price asc;") :
-                entityManager.createNativeQuery(
-                        "SELECT * FROM PRODUCT\n" +
-                                "ORDER BY unit_price desc;");
 
-        return query.getResultList();
-    }
-
-    public List<Product> select7(Boolean asc) {
+    public List<Product> filterByRating(Boolean asc) {
         Query query = asc ? entityManager.createNativeQuery(
                 "SELECT * FROM PRODUCT\n" +
                         "ORDER BY rating asc;") :
