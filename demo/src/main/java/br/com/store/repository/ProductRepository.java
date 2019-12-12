@@ -1,6 +1,5 @@
 package br.com.store.repository;
 
-import br.com.store.domain.Orders;
 import br.com.store.domain.Product;
 import org.springframework.data.repository.Repository;
 
@@ -16,4 +15,6 @@ public interface ProductRepository extends Repository<Product, Long> {
     void delete(Long id_prod);
 
     void update_price(Long id_prod, float new_price);
+
+
 }
