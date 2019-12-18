@@ -18,29 +18,30 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Autowired
     private EntityManager entityManager;
 
+
     public List<Product> findAll() throws PersistenceException {
 
-        Query query = entityManager.createQuery("SELECT P FROM product P inner join product_detail pd on pd.id_prod = P.id_prod");
+        Query query = entityManager.createNativeQuery("SELECT * FROM PRODUCT P ");
         return query.getResultList();
 
     }
 
     public Product findOne(Long id_prod) throws PersistenceException {
 
-        Query query = entityManager.createQuery("SELECT P FROM PRODUCT P inner join PRODUCT_DETAIL pd on pd.id_prod = P.id_prod WHERE P.id_prod = :input_id")
+        Query query = entityManager.createQuery("SELECT P FROM PRODUCT P inner join PRODUCT_DETAIL pd on pd.product = P WHERE P.id_prod = :input_id")
                 .setParameter("input_id",id_prod);
 
         return (Product) query.getSingleResult();
     }
 
-    public void delete(Long id_prod) throws PersistenceException {
+    public void delete(Product p) throws PersistenceException {
 
         //APAGAR OS DETALHES DO PRODUTO ANTES DE APAGAR O PRODUTO EM SI , RESTRIÇÃO DE INTEGRIDADE.
-        Query q = entityManager.createQuery("DELETE FROM PRODUCT_DETAIL pd WHERE pd.id_prod =:input_id")
-                .setParameter("input_id",id_prod);
+        Query q = entityManager.createQuery("DELETE FROM PRODUCT_DETAIL pd WHERE pd.product =:p")
+                .setParameter("p",p);
 
         Query query = entityManager.createQuery("DELETE  FROM PRODUCT P WHERE P.id_prod = :input_id")
-                .setParameter("input_id",id_prod);
+                .setParameter("input_id",p.getId_prod());
 
     }
 

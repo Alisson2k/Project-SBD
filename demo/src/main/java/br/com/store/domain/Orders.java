@@ -1,7 +1,6 @@
 package br.com.store.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,7 +13,7 @@ public class Orders implements Serializable {
 
     @OneToOne
     @JoinColumn
-    private Long id_prod;
+    private Product product;
 
     @Column(name = "order_date")
     private Date order_date;
@@ -39,12 +38,12 @@ public class Orders implements Serializable {
         this.id_order = id_order;
     }
 
-    public Long getId_prod() {
-        return id_prod;
+    public Product getId_prod() {
+        return product;
     }
 
-    public void setId_prod(Long id_prod) {
-        this.id_prod = id_prod;
+    public void setId_prod(Product product) {
+        this.product = product;
     }
 
     public Date getOrder_date() {
@@ -91,7 +90,7 @@ public class Orders implements Serializable {
     public String toString() {
         return "Orders{" +
                 "id_order=" + id_order +
-                ", id_prod=" + id_prod +
+                ", id_prod=" + product +
                 ", order_date=" + order_date +
                 ", order_state='" + order_state + '\'' +
                 ", quantity=" + quantity +

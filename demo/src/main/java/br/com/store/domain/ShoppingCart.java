@@ -1,7 +1,5 @@
 package br.com.store.domain;
 
-import br.com.store.repository.ProductRepository;
-
 import javax.persistence.*;
 
 @Entity(name = "SHOPPING_CART")

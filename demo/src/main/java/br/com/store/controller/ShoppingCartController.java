@@ -3,13 +3,12 @@ package br.com.store.controller;
 import br.com.store.domain.ShoppingCart;
 import br.com.store.repository.Impl.ShoppingCartRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/Cart")
-@Controller
+@RestController
 public class ShoppingCartController {
 
     @Autowired

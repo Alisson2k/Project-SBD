@@ -3,40 +3,33 @@ package br.com.store.controller;
 import br.com.store.domain.Product;
 import br.com.store.repository.Impl.ProductRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
+
 import java.util.List;
 
-@Controller
-@RequestMapping("/products")
+@RestController
+@RequestMapping(value = "/products",method = RequestMethod.GET)
 public class ProductController {
 
     @Autowired
     private ProductRepositoryImpl product;
 
-    private EntityManager entityManager;
 
     @GetMapping("/")
-    public void index(){
+    public List<Product> index(){
 
-        Query query = entityManager.createQuery("BEGIN TRANSACTION");
+        return product.findAll();
+    }
 
-        try {
 
-            List<Product> products = product.findAll();
-            entityManager.createQuery("COMMIT");
+    @GetMapping("/find/{id}")
+    public Product findOne(@PathVariable("id") Long id){
 
-        }catch (PersistenceException e){
+        Product pr = product.findOne(id);
 
-            entityManager.createQuery("ROLLBACK");
+        return pr;
 
-        }
     }
 
     @GetMapping("/filter/byprice")
@@ -57,7 +50,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/filter/byprice")
+    @GetMapping("/filter/bycategory")
     public List<Product> filterByCategory(){
 
         List<Product> pr = product.filterByCategory();
@@ -68,7 +61,7 @@ public class ProductController {
 
 
     @GetMapping("/search/{id}")
-    public Product search(Long id){
+    public Product search(@PathVariable("id") Long id){
 
         Product prod = product.findOne(id);
 
@@ -78,9 +71,9 @@ public class ProductController {
 
 
     @PostMapping("/delete/{id}")
-    public void delete(Long id){
+    public void delete(Product p){
 
-        product.delete(id);
+        product.delete(p);
 
     }
 
