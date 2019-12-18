@@ -17,7 +17,7 @@ public interface ProductRepository extends Repository<Product, Long> {
 
     void update_price(Long id_prod, float new_price);
 
-    List<Product> filterByCategory();
+    List<Product> filterByCategory(String category);
 
     List<Product> avgOfBestRatingCategories();
 

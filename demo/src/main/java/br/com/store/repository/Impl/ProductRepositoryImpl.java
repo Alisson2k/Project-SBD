@@ -52,19 +52,18 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     public void update_price(Long id_prod, float new_price) throws PersistenceException {
 
-        Query query = entityManager.createQuery("UPDATE PRODUCT P SET P.unit_price = :new_price WHERE P.id_prod = :input_id")
-                .setParameter("input_id", id_prod)
-                .setParameter("new_price", new_price);
+        int updatePrice = entityManager.createNativeQuery("UPDATE PRODUCT SET unit_price = ?1 WHERE id_prod = ?2")
+                .setParameter(2, id_prod)
+                .setParameter(1, new_price).executeUpdate();
 
     }
 
-    public List<Product> filterByCategory() {
+    public List<Product> filterByCategory(String category) {
         Query query = entityManager.createNativeQuery(
                 "SELECT * FROM PRODUCT P\n" +
-                        "NATURAL JOIN PRODUCT_DETAIL PD\n" +
-                        "WHERE P.unit_price < 1000\n" +
-                        "AND PD.category = 'Eletrônicos';"
-        );
+                        " INNER JOIN PRODUCT_DETAIL PD on P.id_prod = PD.product_id_prod\n" +
+                        " WHERE PD.category = ?1"
+        ).setParameter(1,category);
         return query.getResultList();
     }
 
