@@ -5,9 +5,6 @@ import br.com.store.repository.Impl.ProductRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import java.util.List;
 
 @RestController
@@ -52,10 +49,10 @@ public class ProductController {
 
     }
 
-    @GetMapping("/filter/bycategory")
-    public List<Product> filterByCategory(){
+    @GetMapping("/filter/{category}")
+    public List<Product> filterByCategory(@PathVariable("category") String category){
 
-        List<Product> pr = product.filterByCategory();
+        List<Product> pr = product.filterByCategory(category);
 
         return pr;
 
@@ -69,9 +66,10 @@ public class ProductController {
 
     }
 
-    @PostMapping("/update/{id}")
-    public void update(Long id, float new_price){
+    @PostMapping("/update/{id}/{price}")
+    public void update(@PathVariable("id") Long id,@PathVariable("price") float new_price){
 
         product.update_price(id,new_price);
+
     }
 }
