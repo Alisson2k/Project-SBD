@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 @RestController
@@ -69,11 +71,10 @@ public class ProductController {
 
     }
 
-
     @PostMapping("/delete/{id}")
-    public void delete(Product p){
+    public void delete(@PathVariable("id")Long id){
 
-        product.delete(p);
+        product.delete(id);
 
     }
 
