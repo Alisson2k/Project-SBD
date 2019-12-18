@@ -23,14 +23,14 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     public List<Product> findAll() throws PersistenceException {
 
-        Query query = entityManager.createNativeQuery("SELECT * FROM PRODUCT P NATURAL JOIN PRODUCT_DETAIL PD");
+        Query query = entityManager.createNativeQuery("SELECT * FROM PRODUCT P INNER JOIN PRODUCT_DETAIL PD ON P.id_prod = PD.product_id_prod");
         return query.getResultList();
 
     }
 
     public Object findOne(Long id_prod) throws PersistenceException {
 
-        Query query = entityManager.createNativeQuery("SELECT * FROM PRODUCT P NATURAL JOIN PRODUCT_DETAIL PD WHERE P.id_prod = ?1")
+        Query query = entityManager.createNativeQuery("SELECT * FROM PRODUCT P INNER JOIN PRODUCT_DETAIL PD ON P.id_prod = PD.product_id_prod WHERE P.id_prod = ?1")
                 .setParameter(1, id_prod);
 
         return query.getSingleResult();

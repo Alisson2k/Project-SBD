@@ -62,15 +62,6 @@ public class ProductController {
     }
 
 
-    @GetMapping("/search/{id}")
-    public Product search(@PathVariable("id") Long id){
-
-        Product prod = (Product) product.findOne(id);
-
-        return prod;
-
-    }
-
     @PostMapping("/delete/{id}")
     public void delete(@PathVariable("id")Long id){
 
