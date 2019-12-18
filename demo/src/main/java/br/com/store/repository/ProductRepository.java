@@ -11,7 +11,7 @@ public interface ProductRepository extends Repository<Product, Long> {
 
     List<Product> findAll();
 
-    Product findOne(Long id_prod);
+    Object findOne(Long id_prod);
 
     void delete(Product p);
 

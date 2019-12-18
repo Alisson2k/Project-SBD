@@ -24,9 +24,9 @@ public class ProductController {
 
 
     @GetMapping("/find/{id}")
-    public Product findOne(@PathVariable("id") Long id){
+    public Object findOne(@PathVariable("id") Long id){
 
-        Product pr = product.findOne(id);
+        Object pr =  product.findOne(id);
 
         return pr;
 
@@ -63,7 +63,7 @@ public class ProductController {
     @GetMapping("/search/{id}")
     public Product search(@PathVariable("id") Long id){
 
-        Product prod = product.findOne(id);
+        Product prod = (Product) product.findOne(id);
 
         return prod;
 
