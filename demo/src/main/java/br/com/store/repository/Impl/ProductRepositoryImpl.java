@@ -10,9 +10,11 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class ProductRepositoryImpl implements ProductRepository {
 
     @Autowired
@@ -34,14 +36,17 @@ public class ProductRepositoryImpl implements ProductRepository {
         return query.getSingleResult();
     }
 
-    public void delete(Product p) throws PersistenceException {
+    public void delete(Long id_prod) throws PersistenceException {
 
-        //APAGAR OS DETALHES DO PRODUTO ANTES DE APAGAR O PRODUTO EM SI , RESTRIÇÃO DE INTEGRIDADE.
-        Query q = entityManager.createQuery("DELETE FROM PRODUCT_DETAIL pd WHERE pd.product =:p")
-                .setParameter("p", p);
 
-        Query query = entityManager.createQuery("DELETE  FROM PRODUCT P WHERE P.id_prod = :input_id")
-                .setParameter("input_id", p.getId_prod());
+        //APAGAR OS DETALHES DO PRODUTO ANTES DE APAGAR O PRODUTO EM SI , RESTRIÇÃO DE INTEGRIDADE
+
+        int deletecoun = entityManager.createNativeQuery("DELETE PD FROM PRODUCT_DETAIL PD INNER JOIN PRODUCT P ON PD.product_id_prod = P.id_prod WHERE P.id_prod = ?1")
+                .setParameter(1,id_prod).executeUpdate();
+
+        int deleteCount = entityManager.createQuery("DELETE FROM PRODUCT P WHERE P.id_prod = ?1")
+                .setParameter(1, id_prod).executeUpdate();
+
 
     }
 
