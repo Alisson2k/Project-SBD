@@ -5,21 +5,25 @@ import javax.persistence.*;
 @Entity(name = "PRODUCT_DETAIL")
 public class ProductDetail {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     @OneToOne
     @JoinColumn
-    private long id_prod;
+    private Product product;
 
-    @Column(name = "gross_weight")
-    private float gross_weight;
+    @Column(name = "gross_weigth")
+    private float gross_weigth;
 
-    @Column(name = "net_weight")
-    private float net_weight;
+    @Column(name = "net_weigth")
+    private float net_weigth;
 
     @Column(name = "type_of_material")
     private String type_of_material;
 
-    @Column(name = "colour")
-    private String colour;
+    @Column(name = "color")
+    private String color;
 
     @Column(name = "model")
     private String model;
@@ -30,28 +34,28 @@ public class ProductDetail {
     @Column(name = "category")
     private String category;
 
-    public long getId_prod() {
-        return id_prod;
+    public Product getId_prod() {
+        return product;
     }
 
-    public void setId_prod(long id_prod) {
-        this.id_prod = id_prod;
+    public void setId_prod(Product product) {
+        this.product = product;
     }
 
-    public float getGross_weight() {
-        return gross_weight;
+    public float getgross_weigth() {
+        return gross_weigth;
     }
 
-    public void setGross_weight(float gross_weight) {
-        this.gross_weight = gross_weight;
+    public void setgross_weigth(float gross_weigth) {
+        this.gross_weigth = gross_weigth;
     }
 
-    public float getNet_weight() {
-        return net_weight;
+    public float getnet_weigth() {
+        return net_weigth;
     }
 
-    public void setNet_weight(float net_weight) {
-        this.net_weight = net_weight;
+    public void setnet_weigth(float net_weigth) {
+        this.net_weigth = net_weigth;
     }
 
     public String getType_of_material() {
@@ -63,11 +67,11 @@ public class ProductDetail {
     }
 
     public String getColor() {
-        return colour;
+        return color;
     }
 
     public void setColor(String colour) {
-        this.colour = colour;
+        this.color = colour;
     }
 
     public String getModel() {
@@ -97,11 +101,11 @@ public class ProductDetail {
     @Override
     public String toString() {
         return "ProductDetail{" +
-                "id_prod=" + id_prod +
-                ", gross_weight=" + gross_weight +
-                ", net_weight=" + net_weight +
+                "id_prod=" + product +
+                ", gross_weigth=" + gross_weigth +
+                ", net_weigth=" + net_weigth +
                 ", type_of_material='" + type_of_material + '\'' +
-                ", color='" + colour + '\'' +
+                ", color='" + color + '\'' +
                 ", model='" + model + '\'' +
                 ", brand='" + brand + '\'' +
                 ", category='" + category + '\'' +

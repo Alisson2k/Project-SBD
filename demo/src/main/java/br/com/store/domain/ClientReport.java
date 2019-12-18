@@ -1,12 +1,13 @@
 package br.com.store.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity(name = "CLIENT_REPORT")
 public class ClientReport {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @ManyToOne
     @JoinColumn
