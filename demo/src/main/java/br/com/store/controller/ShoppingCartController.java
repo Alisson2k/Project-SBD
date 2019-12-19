@@ -15,7 +15,7 @@ public class ShoppingCartController {
     private ShoppingCartRepositoryImpl cart;
 
     @GetMapping("/{id}")
-    public List<ShoppingCart> index(@PathVariable("id") Long id_person){
+    public List<ShoppingCart> index(@PathVariable("id") Long id_person) {
 
         List<ShoppingCart> sp = cart.findAll(id_person);
 
@@ -24,10 +24,9 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/total/{id}")
-    public float subtotal(@PathVariable("id") Long id_person){
+    public Object subtotal(@PathVariable("id") Long id_person) {
 
-        float total = cart.subtotal(id_person);
+        return cart.subtotal(id_person);
 
-        return total;
     }
 }
