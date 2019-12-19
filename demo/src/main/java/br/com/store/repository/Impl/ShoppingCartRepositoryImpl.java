@@ -1,7 +1,5 @@
 package br.com.store.repository.Impl;
 
-import br.com.store.domain.Person;
-import br.com.store.domain.Product;
 import br.com.store.domain.ShoppingCart;
 import br.com.store.repository.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,35 +16,22 @@ public class ShoppingCartRepositoryImpl implements ShoppingCartRepository {
     @Autowired
     private EntityManager entityManager;
 
-    public List<ShoppingCart> findAll(Long id_person){
+    public List<ShoppingCart> findAll(Long id_person) {
 
-        Query query = entityManager.createQuery("select sp from SHOPPING_CART sp where sp.person.id_person = :p ")
-                .setParameter("p",id_person);
+        Query query = entityManager.createNativeQuery("SELECT * FROM SHOPPING_CART SP WHERE SP.person_id_person = ?1")
+                .setParameter(1, id_person);
 
         return query.getResultList();
 
     }
 
-    public void insert_Cart(Product pr, Person p){
 
+    public Object subtotal(Long id_person) {
 
+        Query query = entityManager.createNativeQuery("SELECT * FROM view_shopping_cart  WHERE person_id_person = ?1 ")
+                .setParameter(1, id_person);
 
-    }
-
-
-    public void delete_Cart(Long id_cart) {
-
-
+        return query.getSingleResult();
 
     }
-
-    public float subtotal(Long id_person){
-
-        Query query = entityManager.createQuery("select vs from VIEW_SHOPPING_CART vs where id_person = :p ")
-                .setParameter("p",id_person);
-
-        return (float) query.getSingleResult();
-
-    }
-
 }
